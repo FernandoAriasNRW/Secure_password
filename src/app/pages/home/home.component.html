@@ -1,1 +1,11 @@
-<h1 class="text-center fw-bold">Welcome to Secure Pass</h1>
+<app-loading *ngIf="loading | async"></app-loading>
+
+<div *ngIf="true" class="row h-100">
+  <div class="col-md-1 col-lg-3 p-0 menu">
+    <app-menu></app-menu>
+  </div>
+
+  <div class="col-md-11 col-lg-9 p-0">
+    <h1 class="text-center fw-bold">Welcome to Secure Pass</h1>
+  </div>
+</div>

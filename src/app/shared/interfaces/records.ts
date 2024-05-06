@@ -5,3 +5,8 @@ export interface Record {
   username: string;
   password: string;
 }
+
+export interface RecordState {
+  records: Record[];
+  loading: boolean;
+}

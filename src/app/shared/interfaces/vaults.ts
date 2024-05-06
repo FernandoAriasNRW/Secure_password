@@ -3,3 +3,8 @@ export interface Vault {
   name: string;
   description: string;
 }
+
+export interface VaultState {
+  vaults: Vault[];
+  loading: boolean;
+}

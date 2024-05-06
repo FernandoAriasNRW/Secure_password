@@ -1,1 +1,18 @@
-<p>login works!</p>
+<div class="login">
+  <app-header></app-header>
+  <form [formGroup]="form" class="custom-form" method="post">
+    <h1>Login</h1>
+    <input
+      type="email"
+      formControlName="email"
+      placeholder="Email"
+
+    />
+    <input
+      type="password"
+      formControlName="password"
+      placeholder="Password"
+    />
+    <button type="submit" (click)="login()">Log in</button>
+  </form>
+</div>

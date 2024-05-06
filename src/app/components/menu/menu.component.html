@@ -27,8 +27,11 @@
       <!-- sidebar-search  -->
       <div class="sidebar-menu">
         <ul>
-          <li class="header-menu">
-            <span>Vaults</span>
+          <li class="sidebar-dropdown">
+            <a [routerLink]="''" >
+              <i class="fa fa-home"></i>
+              <span>My Vault</span>
+            </a>
           </li>
           <li class="sidebar-dropdown">
             <a [routerLink]="" (click)="showMenu(dashboard)">
