@@ -1,7 +1,7 @@
-<div class="login">
-  <app-header></app-header>
+<app-loading *ngIf="loading" ></app-loading>
+<div *ngIf="!loading" class="login">
   <form [formGroup]="form" class="custom-form" method="post">
-    <h1>Login</h1>
+    <h1>Secure Pass</h1>
     <input
       type="email"
       formControlName="email"
@@ -13,6 +13,6 @@
       formControlName="password"
       placeholder="Password"
     />
-    <button type="submit" (click)="login()">Log in</button>
+    <button type="submit" (click)="login()" (keypress)="login()">Log in</button>
   </form>
 </div>

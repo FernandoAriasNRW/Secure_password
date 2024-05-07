@@ -27,4 +27,8 @@ export class AuthService {
   register(){
 
   }
+
+  getToken(){
+    return localStorage.getItem('auth_token');
+  }
 }

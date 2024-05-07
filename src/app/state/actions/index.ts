@@ -12,6 +12,11 @@ export const user = createAction(
   props<{ user: User }>()
 );
 
+export const getUser = createAction(
+  '[Home Page] Get User',
+  props<{ user: string }>()
+);
+
 export const records = createAction(
   '[Home Page] Records',
   props<{ records: Record[] }>()

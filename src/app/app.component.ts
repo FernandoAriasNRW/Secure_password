@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -6,6 +6,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { CommonModule } from '@angular/common';
+import { AppState } from './shared/interfaces/state';
+import { Store } from '@ngrx/store';
+import { selectLogin } from './state/selectors';
 
 @Component({
   selector: 'app-root',
@@ -22,9 +25,20 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'securePassword';
+  isLoggedIn = false;
 
-  
+  constructor(
+    private readonly store: Store<AppState>,
+  ){
+
+  }
+  ngOnInit(): void {
+    // this.store.select(selectLogin).subscribe( data => {
+    //   console.log(this.isLoggedIn);
+    //   this.isLoggedIn = data.isLoggedIn;
+    // });
+  }
 
 }

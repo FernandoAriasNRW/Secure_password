@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "../../components/header/header.component";
 import { MenuComponent } from "../../components/menu/menu.component";
+import { Router } from '@angular/router';
+import { loginAction } from '../../state/actions';
+import { SearchComponent } from '../../components/search/search.component';
 
 @Component({
     selector: 'app-home',
@@ -17,7 +20,8 @@ import { MenuComponent } from "../../components/menu/menu.component";
         LoadingComponent,
         CommonModule,
         HeaderComponent,
-        MenuComponent
+        MenuComponent,
+        SearchComponent,
     ]
 })
 export class HomeComponent implements OnInit {
@@ -25,9 +29,29 @@ export class HomeComponent implements OnInit {
   private _loading: Observable<Boolean> = new Observable();
 
   constructor(
-    private readonly store: Store<AppState>
-  ) { }
+    private readonly store: Store<AppState>,
+    private readonly router: Router,
+  ) {
+
+  }
   ngOnInit(): void {
+
+
+    const token = localStorage.getItem('auth_token')
+
+    if (token){
+      this.store.dispatch(loginAction({login: true}));
+    }
+
+    this.store.select(selectLogin).subscribe(login => {
+
+      const isLoggedIn = login.isLoggedIn;
+
+          if (!isLoggedIn) {
+            this.router.navigate(['/login']);
+          }
+    });
+
    this._loading = this.store.select(selectLoading);
   }
 

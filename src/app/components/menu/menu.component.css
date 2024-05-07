@@ -39,7 +39,7 @@
   }
 }
 body {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 .page-wrapper .sidebar-wrapper,
 .sidebar-wrapper .sidebar-brand > a,
@@ -126,12 +126,12 @@ body {
   text-transform: uppercase;
   font-weight: bold;
   flex-grow: 1;
-  font-size: 2rem;
+  font-size: 1.2rem;
 }
 
 .sidebar-wrapper .sidebar-brand #close-sidebar {
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 /*-----------------------sidebar-search------------------------*/
@@ -154,7 +154,7 @@ input.search-menu::placeholder {
 
 .sidebar-wrapper .sidebar-menu .header-menu span {
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 0.8rem;
   padding: 2rem 4rem 1rem 4rem;
   display: inline-block;
 }
@@ -165,16 +165,18 @@ input.search-menu::placeholder {
   text-decoration: none;
   position: relative;
   padding: 1rem 5rem 1rem 1rem;
+  cursor: pointer;
 }
 
 .sidebar-wrapper .sidebar-menu ul li a i {
   margin-right: 10px;
-  font-size: 12px;
+  font-size: 0.8rem;
   width: 30px;
   height: 30px;
   line-height: 30px;
   text-align: center;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .sidebar-wrapper .sidebar-menu ul li a:hover > i::before {
@@ -205,7 +207,7 @@ input.search-menu::placeholder {
 
 .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li {
   padding-left: 25px;
-  font-size: 13px;
+  font-size: 0.8rem;
 }
 
 .sidebar-wrapper .sidebar-menu .sidebar-dropdown .sidebar-submenu li a:before {
@@ -218,7 +220,7 @@ input.search-menu::placeholder {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   margin-right: 10px;
-  font-size: larger;
+  font-size: 0.75rem;
 }
 
 .sidebar-wrapper .sidebar-menu ul li a span.label,
@@ -442,7 +444,7 @@ input.search-menu::placeholder {
 }
 
 a {
-  font-size: 1.2rem;
+  font-size: 0.75rem;
 }
 
 .page-wrapper .sidebar-wrapper {
