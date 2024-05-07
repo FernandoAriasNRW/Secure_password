@@ -11,7 +11,7 @@
       <ul class="navbar-nav w-100 d-flex justify-content-end">
         <li class="nav-item d-flex ">
           <a href="#" class="d-flex flex-row">
-            <p class="text-white me-2 mb-0 align-self-end">dani&#64;gmail.com</p>
+            <p *ngIf="user" class="text-white me-2 mb-0 align-self-end">{{ user.email }}</p>
             <img src="../../../assets/images/no-image.png" alt="Avatar image" class="img-fluid">
           </a>
         </li>
