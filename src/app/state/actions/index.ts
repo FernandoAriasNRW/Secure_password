@@ -1,10 +1,15 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from '../../shared/interfaces/auth';
+import { AppError, User } from '../../shared/interfaces/auth';
 import { Record } from '../../shared/interfaces/records';
 
 export const login = createAction(
   '[Login Page] Login',
   props<{ email: string, password: string }>()
+);
+
+export const loginError = createAction(
+  '[Login Page] Login Error',
+  props<{ error: AppError }>()
 );
 
 export const user = createAction(

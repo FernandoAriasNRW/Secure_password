@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "../../components/header/header.component";
 import { MenuComponent } from "../../components/menu/menu.component";
 import { Router } from '@angular/router';
-import { loginAction } from '../../state/actions';
+import { getUser, loginAction } from '../../state/actions';
 import { SearchComponent } from '../../components/search/search.component';
 
 @Component({
@@ -33,14 +33,24 @@ export class HomeComponent implements OnInit {
     private readonly router: Router,
   ) {
 
+
+
   }
   ngOnInit(): void {
 
+    const token = localStorage.getItem('auth_token');
+    const userId = localStorage.getItem('user_id');
+    const expiresIn = localStorage.getItem('expires_in');
 
-    const token = localStorage.getItem('auth_token')
+    if (token && userId && expiresIn) {
 
-    if (token){
-      this.store.dispatch(loginAction({login: true}));
+      const now = Date.now();
+      const expires = Date.parse(expiresIn);
+
+      if ( expires < now ) {
+        this.store.dispatch(loginAction({login: true}));
+        this.store.dispatch(getUser({user: userId}))
+      }
     }
 
     this.store.select(selectLogin).subscribe(login => {

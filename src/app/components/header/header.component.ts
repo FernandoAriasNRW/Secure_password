@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SearchComponent } from '../search/search.component';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../shared/interfaces/state';
@@ -17,25 +17,28 @@ import { CommonModule } from '@angular/common';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
 
   user!: User;
 
   constructor(
     private readonly store: Store<AppState>,
   ){}
+  ngAfterViewInit(): void {
+
+  }
 
   ngOnInit(): void {
     const userId = localStorage.getItem('user_id');
-
+    console.log('UserId On Init Header', userId);
     if (userId) {
       this.store.dispatch(getUser({ user: userId }));
     }
 
     this.store.select(selectUser).subscribe( result => {
       this.user = result.user;
+      console.log(this.user);
     })
-
   }
 
 }

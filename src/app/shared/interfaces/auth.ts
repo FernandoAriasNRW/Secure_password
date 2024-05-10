@@ -6,11 +6,13 @@ export interface Login {
 export interface LoginState {
   isLoggedIn: boolean;
   loading: boolean;
+  error: AppError;
 }
 
 export interface UserState {
   user: User;
   loading: boolean;
+  error: AppError;
 }
 
 export interface User {
@@ -26,4 +28,10 @@ export interface LoginResponse {
   token: string;
   userId: string;
   role: string;
+  expiresIn: string;
+}
+
+export interface AppError {
+  message: string;
+  status: number;
 }

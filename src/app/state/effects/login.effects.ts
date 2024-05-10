@@ -17,11 +17,15 @@ export class LoginEffects {
         localStorage.setItem('auth_token', result.token);
         localStorage.setItem('user_id', result.userId);
         localStorage.setItem('user_role', result.role);
+        localStorage.setItem('expires_in', result.expiresIn);
 
-        return { type: '[Login Page] Login Success',  login: true}
+        if (result.token) {
+          return { type: '[Login Page] Login Success',  login: true};
+        }
+        return { type: '[Login Page] Login Error', error: { message: 'Wrong Email or Password', statusCode: 400 } };
       }
       ),
-      catchError(error => of({ type: '[Login Page] Login Success', error }))
+      catchError((error: Error) => of({ type: '[Login Page] Login Error', error: { message: error.message, statusCode: 400 } }))
     ))))
 
   constructor(

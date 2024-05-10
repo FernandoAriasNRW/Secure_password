@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { AppState } from '../../shared/interfaces/state';
-import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { HeaderComponent } from "../../components/header/header.component";
 import { login, loginAction } from '../../state/actions';
-import { Router } from '@angular/router';
 import { selectLoading, selectLogin } from '../../state/selectors';
-import { CommonModule } from '@angular/common';
 import { LoadingComponent } from "../../components/loading/loading.component";
 
 @Component({
@@ -21,16 +22,16 @@ import { LoadingComponent } from "../../components/loading/loading.component";
         LoadingComponent
     ]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnChanges {
 
   form!: FormGroup;
   private _loading: boolean = false;
+  private _isLoggedIn: boolean = false;
 
   constructor(
     private readonly store: Store<AppState>,
     private readonly router: Router,
   ) {
-
     this.store.select(selectLoading).subscribe( loading => {
       this._loading = loading;
     })
@@ -40,10 +41,15 @@ export class LoginComponent implements OnInit {
       const isLoggedIn = login.isLoggedIn;
 
       if (isLoggedIn) {
+        console.log('Constructor')
        this.router.navigate(['/']);
+
      }
 
     });
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
   }
 
   ngOnInit() {
@@ -55,23 +61,73 @@ export class LoginComponent implements OnInit {
     }
 
     this.form = new FormGroup({
-      email: new FormControl(),
-      password: new FormControl(),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required]),
     });
   }
 
   login() {
 
-    this.store.dispatch(login({email: this.form.controls['email'].value, password: this.form.controls['password'].value }));
+    if (this.form.valid) {
 
-    this.store.select(selectLogin).subscribe(login => {
-      const isLoggedIn = login.isLoggedIn
+      this.store.dispatch(login({email: this.form.controls['email'].value, password: this.form.controls['password'].value }));
 
-      if (isLoggedIn) {
-        this.router.navigate(['/']);
+      this.store.select(selectLogin).subscribe(login => {
+
+        if (this._isLoggedIn !== login.isLoggedIn) {
+          this._isLoggedIn = login.isLoggedIn;
+        if(this._isLoggedIn){
+
+          this.router.navigate(['/']);
+          return;
+        } else {
+          this._loading = false;
+
+          const Toast = Swal.mixin({
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+
+          Toast.fire({
+            icon: "error",
+            title: "Wrong email or password",
+          });
+        }}
+      });
+    }
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+
+      if (!(this.form.controls['email'].valid)) {
+
+        Toast.fire({
+          icon: "error",
+          title: "Please enter a valid email address",
+        });
+      } else if (!(this.form.controls['password'].valid)) {
+
+        Toast.fire({
+          icon: "error",
+          title: "Please enter a password",
+        });
       }
 
-    });
   }
 
   get loading(): boolean {

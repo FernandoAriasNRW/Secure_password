@@ -1,3 +1,5 @@
+import { AppError } from "./auth";
+
 export interface Record {
   id: string;
   name: string;
@@ -9,4 +11,5 @@ export interface Record {
 export interface RecordState {
   records: Record[];
   loading: boolean;
+  error: AppError;
 }

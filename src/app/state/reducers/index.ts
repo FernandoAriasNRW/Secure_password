@@ -6,8 +6,8 @@ import {
   createSelector,
   on
 } from '@ngrx/store';
-import { login, loginAction, records, user, vaults } from '../actions';
-import { LoginState, User, UserState } from '../../shared/interfaces/auth';
+import { getUser, login, loginAction, loginError, records, user, vaults } from '../actions';
+import { AppError, LoginState, User, UserState } from '../../shared/interfaces/auth';
 import { RecordState } from '../../shared/interfaces/records';
 import { VaultState } from '../../shared/interfaces/vaults';
 import { AppState } from '../../shared/interfaces/state';
@@ -22,36 +22,60 @@ export const initialState: AppState = {
       password: "",
       role: ""
     },
-    loading: false
+    loading: false,
+    error: {
+      message: "",
+      status: 0
+    },
   },
   records: {
     records: [],
-    loading: false
+    loading: false,
+    error: {
+      message: "",
+      status: 0
+    },
   },
   login: {
     isLoggedIn: false,
-    loading: false
+    loading: false,
+    error: {
+      message: "",
+      status: 0
+    },
   },
   vaults: {
     vaults: [],
-    loading: false
+    loading: false,
+    error: {
+      message: "",
+      status: 0
+    },
   }
 };
 
 export const loginReducer = createReducer(
   initialState.login,
-  on(loginAction, (state: LoginState) => {
-    return { ...state, loading: false, isLoggedIn: true };
+  on(loginAction, (state: LoginState, action) => {
+    return { ...state, loading: false, isLoggedIn: action.login };
   }),
   on(login, (state: LoginState) => {
     return { ...state, loading: true, isLoggedIn: false };
+  }),
+  on(loginError, (state: LoginState, action) => {
+    return { ...state, loading: false, error: action.error };
   })
 );
 
 export const userReducer = createReducer(
   initialState.user,
   on(user, (state: UserState, {user}) => {
+    console.log('Reducer executed by User Action');
     return { ...state, user: user, loading: false };
+  }),
+  on(getUser, (state: UserState) => {
+    console.log('Reducer executed by Get User Action');
+    return { ...state, loading: false };
   })
 );
 

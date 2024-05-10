@@ -10,13 +10,15 @@ import { User } from "../shared/interfaces/auth";
 })
 export class UserService {
 
-  accessToken: string | null = this.authService.getToken();
+  accessToken: string | null = "";
   constructor(
     private readonly http: HttpClient,
     private readonly authService: AuthService
   ){}
 
   getUser(userId:string){
+    this.accessToken = this.authService.getToken();
+    console.log('Token in Get User: ', this.accessToken);
     return this.http.get<User | null>(`${environment.apiUrl}/User/${userId}`, {
       headers: {
         'Authorization': `Bearer ${this.accessToken}`
