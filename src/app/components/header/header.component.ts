@@ -30,15 +30,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     const userId = localStorage.getItem('user_id');
-    console.log('UserId On Init Header', userId);
+    
     if (userId) {
       this.store.dispatch(getUser({ user: userId }));
-    }
+     }
 
-    this.store.select(selectUser).subscribe( result => {
-      this.user = result.user;
-      console.log(this.user);
-    })
+     this.store.select(selectUser).subscribe( result => {
+       this.user = result.user;
+     })
   }
 
 }

@@ -1,0 +1,43 @@
+<form [formGroup]="formulario" (ngSubmit)="sendForm()" class="bg-dark">
+  <div class="mb-3">
+    <label for="name" class="form-label text-white">Nombre:</label>
+    <input type="text" id="name" formControlName="name" class="form-control">
+    <!-- Mostramos el mensaje de error si el campo "nombre" es inválido y ha sido tocado -->
+    <span *ngIf="formulario.get('name')?.invalid && formulario.get('name')?.touched">
+      <span *ngIf="formulario.get('name')?.errors" class="error">El nombre es requerido.</span>
+    </span>
+  </div>
+  <div>
+    <label for="username" class="form-label text-white">Email:</label>
+    <input type="text" id="username" formControlName="username" class="form-control">
+    <!-- Mostramos el mensaje de error si el campo "email" es inválido y ha sido tocado -->
+    <span *ngIf="formulario.get('username')?.invalid && formulario.get('username')?.touched">
+      <span *ngIf="formulario.get('username')?.errors" class="error">El username es requerido</span>
+    </span>
+  </div>
+  <div>
+    <label for="password" class="form-label text-white">Password:</label>
+    <input type="text" id="password" formControlName="password" class="form-control">
+    <!-- Mostramos el mensaje de error si el campo "telefono" es inválido y ha sido tocado -->
+    <span *ngIf="formulario.get('password')?.invalid && formulario.get('password')?.touched">
+      <span *ngIf="formulario.get('password')?.errors" class="error">El teléfono debe contener 10 dígitos.</span>
+    </span>
+  </div>
+  <div>
+    <label for="url" class="form-label text-white">URL:</label>
+    <input type="text" id="url" formControlName="url" class="form-control">
+    <!-- Mostramos el mensaje de error si el campo "telefono" es inválido y ha sido tocado -->
+    <span *ngIf="formulario.get('url')?.invalid && formulario.get('url')?.touched">
+      <span *ngIf="formulario.get('url')?.errors" class="error">El teléfono debe contener 10 dígitos.</span>
+    </span>
+  </div>
+  <div>
+    <label for="description" class="form-label text-white">Descripcion:</label>
+    <input type="textarea" id="description" formControlName="description" class="form-control">
+    <!-- Mostramos el mensaje de error si el campo "telefono" es inválido y ha sido tocado -->
+    <span *ngIf="formulario.get('description')?.invalid && formulario.get('description')?.touched">
+      <span *ngIf="formulario.get('description')?.errors" class="error">El teléfono debe contener 10 dígitos.</span>
+    </span>
+  </div>
+  <button type="submit" [disabled]="formulario.invalid" class="btn btn-primary">Enviar</button>
+</form>

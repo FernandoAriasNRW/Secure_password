@@ -41,15 +41,12 @@ export class LoginComponent implements OnInit, OnChanges {
       const isLoggedIn = login.isLoggedIn;
 
       if (isLoggedIn) {
-        console.log('Constructor')
        this.router.navigate(['/']);
-
      }
 
     });
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
   }
 
   ngOnInit() {

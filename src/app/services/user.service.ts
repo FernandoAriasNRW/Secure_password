@@ -18,7 +18,6 @@ export class UserService {
 
   getUser(userId:string){
     this.accessToken = this.authService.getToken();
-    console.log('Token in Get User: ', this.accessToken);
     return this.http.get<User | null>(`${environment.apiUrl}/User/${userId}`, {
       headers: {
         'Authorization': `Bearer ${this.accessToken}`

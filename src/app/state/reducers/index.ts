@@ -6,7 +6,7 @@ import {
   createSelector,
   on
 } from '@ngrx/store';
-import { getUser, login, loginAction, loginError, records, user, vaults } from '../actions';
+import { getRecords, getUser, login, loginAction, loginError, records, user, vaults } from '../actions';
 import { AppError, LoginState, User, UserState } from '../../shared/interfaces/auth';
 import { RecordState } from '../../shared/interfaces/records';
 import { VaultState } from '../../shared/interfaces/vaults';
@@ -70,11 +70,9 @@ export const loginReducer = createReducer(
 export const userReducer = createReducer(
   initialState.user,
   on(user, (state: UserState, {user}) => {
-    console.log('Reducer executed by User Action');
     return { ...state, user: user, loading: false };
   }),
   on(getUser, (state: UserState) => {
-    console.log('Reducer executed by Get User Action');
     return { ...state, loading: false };
   })
 );
@@ -82,7 +80,11 @@ export const userReducer = createReducer(
 export const recordReducer = createReducer(
   initialState.records,
   on(records, (state: RecordState, {records}) => {
+    console.log('Records: ', records);
     return { ...state, records: records, loading: false };
+  }),
+  on(getRecords, (state: RecordState) => {
+    return {...state, loading: false};
   })
 );
 

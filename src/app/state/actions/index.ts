@@ -22,9 +22,23 @@ export const getUser = createAction(
   props<{ user: string }>()
 );
 
+export const getRecords = createAction(
+  '[Home Page] Get Records'
+);
+
 export const records = createAction(
   '[Home Page] Records',
   props<{ records: Record[] }>()
+);
+
+export const recordsFailed = createAction(
+  '[Home Page] Records Failed',
+  props<{ error: Error }>()
+);
+
+export const getRecordsFailed = createAction(
+  '[Home Page] Get Records Failed',
+  props<{ error: Error }>()
 );
 
 export const vaults = createAction(

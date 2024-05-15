@@ -8,8 +8,9 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "../../components/header/header.component";
 import { MenuComponent } from "../../components/menu/menu.component";
 import { Router } from '@angular/router';
-import { getUser, loginAction } from '../../state/actions';
+import { getRecords, getUser, loginAction } from '../../state/actions';
 import { SearchComponent } from '../../components/search/search.component';
+import { ListsComponent } from '../lists/lists.component';
 
 @Component({
     selector: 'app-home',
@@ -22,6 +23,7 @@ import { SearchComponent } from '../../components/search/search.component';
         HeaderComponent,
         MenuComponent,
         SearchComponent,
+        ListsComponent,
     ]
 })
 export class HomeComponent implements OnInit {
@@ -31,11 +33,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private readonly store: Store<AppState>,
     private readonly router: Router,
-  ) {
-
-
-
-  }
+  ) { }
   ngOnInit(): void {
 
     const token = localStorage.getItem('auth_token');
@@ -47,9 +45,17 @@ export class HomeComponent implements OnInit {
       const now = Date.now();
       const expires = Date.parse(expiresIn);
 
-      if ( expires < now ) {
+
+      if ( expires >= now ) {
         this.store.dispatch(loginAction({login: true}));
-        this.store.dispatch(getUser({user: userId}))
+        this.store.dispatch(getUser({user: userId}));
+        this.store.dispatch(getRecords());
+      } else {
+        this.store.dispatch(loginAction({login: false}));
+        localStorage.removeItem('auth_token');
+        localStorage.removeItem('user_id');
+        localStorage.removeItem('expires_in');
+        localStorage.removeItem('user_role');
       }
     }
 
