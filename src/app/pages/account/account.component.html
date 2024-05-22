@@ -1,0 +1,13 @@
+
+<app-loading *ngIf="loading"></app-loading>
+
+<div *ngIf="!loading" class="row h-100">
+  <div class="col-md-1 col-lg-3 p-0 menu">
+    <app-menu></app-menu>
+  </div>
+
+  <div class="col-md-11 col-lg-9 p-0">
+    <app-header></app-header>
+    <p>account works!</p>
+  </div>
+</div>

@@ -56,5 +56,15 @@ export const loginAction = createAction(
   props<{ login: boolean }>()
 );
 
+export const selectedRecord = createAction(
+  '[Home Page] Selected Record',
+  props<{ record: Record | null }>()
+);
+
+export const showForm = createAction(
+  '[Form Field] Show',
+  props<{ show: boolean }>()
+);
+
 
 

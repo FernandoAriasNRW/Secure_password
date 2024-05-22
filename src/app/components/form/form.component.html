@@ -1,43 +1,46 @@
-<form [formGroup]="formulario" (ngSubmit)="sendForm()" class="bg-dark">
+<form *ngIf="showForm" [formGroup]="form" (ngSubmit)="sendForm()" class="bg-light p-4 rounded-3 me-2 d-flex flex-column" #formElement>
   <div class="mb-3">
-    <label for="name" class="form-label text-white">Nombre:</label>
+    <h1 class="text-black mb-3">{{ title }}</h1>
+    <label for="name" class="form-label text-black">Name:</label>
     <input type="text" id="name" formControlName="name" class="form-control">
     <!-- Mostramos el mensaje de error si el campo "nombre" es inválido y ha sido tocado -->
-    <span *ngIf="formulario.get('name')?.invalid && formulario.get('name')?.touched">
-      <span *ngIf="formulario.get('name')?.errors" class="error">El nombre es requerido.</span>
+    <span *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+      <span *ngIf="form.get('name')?.errors" class="error text-danger">Name is required</span>
     </span>
   </div>
   <div>
-    <label for="username" class="form-label text-white">Email:</label>
+    <label for="username" class="form-label text-black">Username:</label>
     <input type="text" id="username" formControlName="username" class="form-control">
     <!-- Mostramos el mensaje de error si el campo "email" es inválido y ha sido tocado -->
-    <span *ngIf="formulario.get('username')?.invalid && formulario.get('username')?.touched">
-      <span *ngIf="formulario.get('username')?.errors" class="error">El username es requerido</span>
+    <span *ngIf="form.get('username')?.invalid && form.get('username')?.touched">
+      <span *ngIf="form.get('username')?.errors" class="error text-danger">Username is required</span>
     </span>
   </div>
   <div>
-    <label for="password" class="form-label text-white">Password:</label>
-    <input type="text" id="password" formControlName="password" class="form-control">
+    <label for="password" class="form-label text-black">Password:</label>
+    <div class="relative">
+      <input type="password" id="password" formControlName="password" class="form-control"  #password>
+      <i class="fa fa-eye-slash" id="togglePassword" #toggle (click)="showPass($event, password)"></i>
+    </div>
     <!-- Mostramos el mensaje de error si el campo "telefono" es inválido y ha sido tocado -->
-    <span *ngIf="formulario.get('password')?.invalid && formulario.get('password')?.touched">
-      <span *ngIf="formulario.get('password')?.errors" class="error">El teléfono debe contener 10 dígitos.</span>
+    <span *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+      <span *ngIf="form.get('password')?.errors" class="error text-danger">Password is required</span>
     </span>
   </div>
   <div>
-    <label for="url" class="form-label text-white">URL:</label>
+    <label for="url" class="form-label text-black">URL:</label>
     <input type="text" id="url" formControlName="url" class="form-control">
-    <!-- Mostramos el mensaje de error si el campo "telefono" es inválido y ha sido tocado -->
-    <span *ngIf="formulario.get('url')?.invalid && formulario.get('url')?.touched">
-      <span *ngIf="formulario.get('url')?.errors" class="error">El teléfono debe contener 10 dígitos.</span>
-    </span>
   </div>
   <div>
-    <label for="description" class="form-label text-white">Descripcion:</label>
+    <label for="description" class="form-label text-black">Description:</label>
     <input type="textarea" id="description" formControlName="description" class="form-control">
     <!-- Mostramos el mensaje de error si el campo "telefono" es inválido y ha sido tocado -->
-    <span *ngIf="formulario.get('description')?.invalid && formulario.get('description')?.touched">
-      <span *ngIf="formulario.get('description')?.errors" class="error">El teléfono debe contener 10 dígitos.</span>
+    <span *ngIf="form.get('description')?.invalid && form.get('description')?.touched">
+      <span *ngIf="form.get('description')?.errors" class="error text-danger">Description is too large</span>
     </span>
   </div>
-  <button type="submit" [disabled]="formulario.invalid" class="btn btn-primary">Enviar</button>
+  <div class="buttons mt-2 align-self-center">
+    <button type="button" class="btn btn-secondary m-2" (click)="hideForm()">Cancel</button>
+    <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Save</button>
+  </div>
 </form>

@@ -13,8 +13,7 @@ export class RecordEffects {
     exhaustMap(() => this._recordService.getRecords().pipe(
       map( (result: Record[]) => {
         if (result){
-          console.log('Records: ', result);
-          return { type: '[Home Page] Records',  records: result }
+          return { type: '[Home Page] Records',  records: result.filter(r => r.vaultId === null) };
         }
         return { type: '[Home Page] Get Records failed',  error: true}
       }

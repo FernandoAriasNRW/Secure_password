@@ -6,11 +6,12 @@ import {
   createSelector,
   on
 } from '@ngrx/store';
-import { getRecords, getUser, login, loginAction, loginError, records, user, vaults } from '../actions';
+import { getRecords, getUser, login, loginAction, loginError, records, selectedRecord, showForm, user, vaults } from '../actions';
 import { AppError, LoginState, User, UserState } from '../../shared/interfaces/auth';
 import { RecordState } from '../../shared/interfaces/records';
 import { VaultState } from '../../shared/interfaces/vaults';
 import { AppState } from '../../shared/interfaces/state';
+import { FormState } from '../../shared/interfaces/form';
 
 export const initialState: AppState = {
   user: {
@@ -31,6 +32,7 @@ export const initialState: AppState = {
   records: {
     records: [],
     loading: false,
+    selectedRecord: null,
     error: {
       message: "",
       status: 0
@@ -51,6 +53,14 @@ export const initialState: AppState = {
       message: "",
       status: 0
     },
+  },
+  form: {
+    loading: false,
+    error: {
+      message: "",
+      status: 0
+    },
+    show: false,
   }
 };
 
@@ -80,11 +90,13 @@ export const userReducer = createReducer(
 export const recordReducer = createReducer(
   initialState.records,
   on(records, (state: RecordState, {records}) => {
-    console.log('Records: ', records);
     return { ...state, records: records, loading: false };
   }),
   on(getRecords, (state: RecordState) => {
     return {...state, loading: false};
+  }),
+  on(selectedRecord, (state: RecordState, { record })  => {
+    return { ...state, loading: false, selectedRecord: record };
   })
 );
 
@@ -94,3 +106,10 @@ export const vaultReducer = createReducer(
     return { ...state, vaults: vaults, loading: false };
   })
 );
+
+export const formReducer = createReducer(
+  initialState.form,
+  on(showForm, (state: FormState, { show }) => {
+    return { ...state, show: show, loading: false };
+  }),
+)

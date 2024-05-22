@@ -1,0 +1,16 @@
+button:hover {
+  background: #92d2f1;
+  border-color: #92d2f1;
+  cursor: pointer;
+}
+
+.relative {
+  position: relative;
+}
+
+.fa {
+  position: absolute;
+  top: 35%;
+  right: 5%;
+  cursor: pointer;
+}

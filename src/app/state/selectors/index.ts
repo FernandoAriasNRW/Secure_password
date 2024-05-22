@@ -12,6 +12,8 @@ export const selectLogin = (state: AppState) => state.login;
 
 export const selectVaults = (state: AppState) => state.vaults;
 
+export const selectForm = (state: AppState) => state.form;
+
 export const selectUserInfo = createSelector( selectUser, (state: UserState) => state.user);
 
 export const selectRecordList = createSelector( selectRecords, (state: RecordState) => state.records);
