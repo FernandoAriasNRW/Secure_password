@@ -1,17 +1,17 @@
-<button type="button" class="btn btn-secondary m-2" (click)="showModal()">Add New Record</button>
+<button type="button" class="btn btn-light m-2" (click)="showModal()">Add New Record</button>
 
 <div id="modal">
   <form [formGroup]="form" class="d-flex flex-column justify-content-around h-100">
+    <h2 class="text-center">Add New Record</h2>
     <div class="form-group d-flex flex-column justify-content-around">
-      <label for="exampleInputEmail1">Name</label>
-      <input type="text" class="form-control bg-secondary text-white" id="exampleInputEmail1"
+      <input type="text" class="form-control bg-transparent input" id="exampleInputEmail1"
         aria-describedby="emailHelp" placeholder="Enter Record Name" formControlName="name">
       <span *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
         <span *ngIf="form.get('name')?.errors" class="error text-danger">Name is required</span>
       </span>
     </div>
-    <div class="">
-      <button [disabled]="form.valid" type="submit" class="btn btn-secondary">Submit</button>
+    <div class="d-flex flex-row justify-content-center mt-2">
+      <button [disabled]="form.invalid" type="submit" class="btn btn-primary me-3">Submit</button>
       <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
     </div>
   </form>

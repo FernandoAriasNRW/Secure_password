@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark p-0 m-0">
-  <div class="container-fluid bg-dark ps-4 m-0 d-flex">
+<nav class="navbar navbar-expand-lg bg-body-tertiary p-0 m-0">
+  <div class="container-fluid ps-4 pe-0 m-0 d-flex header">
     <div class="col-4">
       <app-search></app-search>
     </div>
@@ -11,7 +11,7 @@
       <ul class="navbar-nav w-100 d-flex justify-content-end">
         <li class="nav-item d-flex ">
           <a href="#" class="d-flex flex-row">
-            <p *ngIf="user" class="text-white me-2 mb-0 align-self-end">{{ user.email }}</p>
+            <p *ngIf="user" class="text-white mb-0 align-self-end">{{ user.email }}</p>
             <img src="../../../assets/images/no-image.png" alt="Avatar image" class="img-fluid">
           </a>
         </li>

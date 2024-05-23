@@ -9,7 +9,7 @@
 }
 
 input.search-menu::placeholder {
-  color:white;
+  color:black;
   border-radius: 2rem;
 }
 
@@ -41,11 +41,11 @@ input.search-menu::placeholder {
 
 .sidebar-search input.search-menu,
 .sidebar-search .input-group-text {
-  background: #3a3f48;
+  background: white;
 }
 
 .sidebar-search .input-group-text:hover {
-  background-color: #3a3f48 !important;
+  background-color: white !important;
   cursor: pointer;
 }
 /* body {

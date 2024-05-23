@@ -1,15 +1,15 @@
 .custom-form {
-  min-width: 300px;
+  min-width: 60%;
   max-width: 60%;
   margin: 0px auto;
   background: rgba(255, 255, 255, 0.15);
   padding: 2rem 3rem;
   margin: auto;
   border-radius: 2.5rem;
-  background-color: #525965;
-  box-shadow: 0px 5px 0px #cbced1;
+  background-color: #1c3c6f;
+  box-shadow: 0px 5px 0px  #1c3c6f;
   color: #ffffff;
-  margin-top: 10rem;
+  align-self: center;
 }
 .custom-form input {
   display: block;
@@ -29,16 +29,24 @@
   font-size: 1rem;
   color: #000;
   font-weight: bolder;
-  background-color: #ffffff;
+  background-color: #fff;
   width: 100%;
   display: block;
   padding: 0.875rem 1rem;
   border-radius: 1.5rem;
-  box-shadow: 0px 2px 0px #b1b1b1;
+  box-shadow: 0px 2px 0px #2a559a;
   cursor: pointer;
 }
 
 .custom-form button:hover {
   background-color: #ebf5fc;
   color: #000;
+}
+
+.login {
+  background-image: url("../../../assets/images/security-bg.avif");
+  background-size: cover;
+  min-height: 100vh;
+  display: flex;
+  backdrop-filter: blur(5px);
 }

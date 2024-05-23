@@ -1,7 +1,8 @@
-<div class="row ms-3 mt-2">
+<div class="row ms-1 mt-2">
   <div class="col-6">
+    <h2 class="text-dark ms-3">My Vault</h2>
     <div class="list-group" id="list-tab" role="tablist" #list>
-      <a *ngFor="let record of recordList" class="list-group-item list-group-item-action m-1 d-flex flex-row justify-content-between row" [id]="record.id" data-toggle="list" [href]="'#' + record.name + record.id" role="tab" aria-controls="home">
+      <a *ngFor="let record of recordList" class="list-group-item list-group-item-action m-1 d-flex flex-row justify-content-between row bg-transparent text-dark border-custom" [id]="record.id" data-toggle="list" [href]="'#' + record.name + record.id" role="tab" aria-controls="home">
        <span class="col-10" (click)="setActive($event, list, contentList, record)"> {{ record.name }}</span>
        <span class="col-2">
         <i class="fa fa-paperclip ms-2" (click)="addToVault(record)"></i>

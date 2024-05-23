@@ -1,1 +1,4 @@
-
+.border-custom {
+  border: 0;
+  border-bottom: 1px solid #1c3c6f;
+}

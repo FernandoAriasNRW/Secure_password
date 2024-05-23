@@ -4,7 +4,6 @@ a {
 
 .brand {
   font-size: 2rem;
-  margin-right: 5rem;
 }
 
 .navbar {
@@ -26,6 +25,11 @@ li {
 a {
   max-width: 20%;
   text-decoration: none;
+}
+
+.header {
+  background-color: #022968;
+  min-width: 101.2%;
 }
 
 

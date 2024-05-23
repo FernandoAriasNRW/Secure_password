@@ -14,3 +14,7 @@ button:hover {
   right: 5%;
   cursor: pointer;
 }
+
+form {
+  background-color: rgba(114, 112, 112, 0.75);
+}
