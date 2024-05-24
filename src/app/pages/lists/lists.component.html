@@ -3,7 +3,7 @@
     <h2 class="text-dark ms-3">My Vault</h2>
     <div class="list-group" id="list-tab" role="tablist" #list>
       <a *ngFor="let record of recordList" class="list-group-item list-group-item-action m-1 d-flex flex-row justify-content-between row bg-transparent text-dark border-custom" [id]="record.id" data-toggle="list" [href]="'#' + record.name + record.id" role="tab" aria-controls="home">
-       <span class="col-10" (click)="setActive($event, list, contentList, record)"> {{ record.name }}</span>
+       <span class="col-10" (click)="setActive($event, list, record)"> {{ record.name }}</span>
        <span class="col-2">
         <i class="fa fa-paperclip ms-2" (click)="addToVault(record)"></i>
         <i class="fa fa-trash-alt ms-2" (click)="deleteRecord(record)"></i>
@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="col-6">
-    <div class="tab-content" id="nav-tabContent" #contentList>
+    <div class="tab-content" id="nav-tabContent">
       <div *ngFor="let record of recordList" class="tab-pane fade" [id]="record.name + record.id" role="tabpanel" aria-labelledby="list-home-list"><span *ngIf="selectedRecord !== null"><app-form [record]="selectedRecord"></app-form></span></div>
     </div>
   </div>

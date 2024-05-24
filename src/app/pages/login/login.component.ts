@@ -2,7 +2,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AppState } from '../../shared/interfaces/state';
 import { HeaderComponent } from "../../components/header/header.component";
@@ -19,7 +19,8 @@ import { LoadingComponent } from "../../components/loading/loading.component";
         HeaderComponent,
         ReactiveFormsModule,
         CommonModule,
-        LoadingComponent
+        LoadingComponent,
+        RouterModule,
     ]
 })
 export class LoginComponent implements OnInit, OnChanges {

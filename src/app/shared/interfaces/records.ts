@@ -16,4 +16,5 @@ export interface RecordState {
   loading: boolean;
   selectedRecord: Record | null;
   error: AppError;
+  newRecord: Record | null;
 }

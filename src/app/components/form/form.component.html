@@ -2,7 +2,7 @@
   <div class="mb-3">
     <h1 class="text-black mb-3">{{ title }}</h1>
     <label for="name" class="form-label text-black">Name:</label>
-    <input type="text" id="name" formControlName="name" class="form-control">
+    <input type="text" formControlName="name" class="form-control">
     <!-- Mostramos el mensaje de error si el campo "nombre" es inválido y ha sido tocado -->
     <span *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
       <span *ngIf="form.get('name')?.errors" class="error text-danger">Name is required</span>
@@ -10,7 +10,7 @@
   </div>
   <div>
     <label for="username" class="form-label text-black">Username:</label>
-    <input type="text" id="username" formControlName="username" class="form-control">
+    <input type="text" formControlName="username" class="form-control">
     <!-- Mostramos el mensaje de error si el campo "email" es inválido y ha sido tocado -->
     <span *ngIf="form.get('username')?.invalid && form.get('username')?.touched">
       <span *ngIf="form.get('username')?.errors" class="error text-danger">Username is required</span>
@@ -19,7 +19,7 @@
   <div>
     <label for="password" class="form-label text-black">Password:</label>
     <div class="relative">
-      <input type="password" id="password" formControlName="password" class="form-control"  #password>
+      <input type="password" formControlName="password" class="form-control"  #password>
       <i class="fa fa-eye-slash" id="togglePassword" #toggle (click)="showPass($event, password)"></i>
     </div>
     <!-- Mostramos el mensaje de error si el campo "telefono" es inválido y ha sido tocado -->
@@ -29,11 +29,11 @@
   </div>
   <div>
     <label for="url" class="form-label text-black">URL:</label>
-    <input type="text" id="url" formControlName="url" class="form-control">
+    <input type="text" formControlName="url" class="form-control">
   </div>
   <div>
     <label for="description" class="form-label text-black">Description:</label>
-    <input type="textarea" id="description" formControlName="description" class="form-control">
+    <input type="textarea" formControlName="description" class="form-control">
     <!-- Mostramos el mensaje de error si el campo "telefono" es inválido y ha sido tocado -->
     <span *ngIf="form.get('description')?.invalid && form.get('description')?.touched">
       <span *ngIf="form.get('description')?.errors" class="error text-danger">Description is too large</span>
@@ -41,6 +41,6 @@
   </div>
   <div class="buttons mt-2 align-self-center">
     <button type="button" class="btn btn-secondary m-2" (click)="hideForm()">Cancel</button>
-    <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Save</button>
+    <button type="submit" [disabled]="form.invalid" class="btn btn-primary" (click)="sendForm">Save</button>
   </div>
 </form>

@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Record } from '../../shared/interfaces/records';
 import { AppState } from '../../shared/interfaces/state';
 import { Store } from '@ngrx/store';
-import { selectedRecord, showForm } from '../../state/actions';
+import { deleteNewRecord, selectedRecord, showForm, updateRecord } from '../../state/actions';
 import { selectRecords } from '../../state/selectors';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form',
@@ -69,14 +70,16 @@ export class FormComponent implements OnInit, OnChanges {
 
         this.title = record.name || 'Title';
         this._selectedRecord = record;
+        if (record.id) {
+          this.form?.patchValue({
+            name: record.name || '',
+            username: record.username || '',
+            description: record.description || '',
+            password: record.password || '',
+            url: record.url || '',
+          });
+        }
 
-        this.form?.patchValue({
-          name: record.name || '',
-          username: record.username || '',
-          description: record.description || '',
-          password: record.password || '',
-          url: record.url || '',
-        });
       }
     })
   }
@@ -86,7 +89,31 @@ export class FormComponent implements OnInit, OnChanges {
   }
 
   sendForm(): void {
-    console.log(this.form.value);
+
+    let record;
+
+    if (this._selectedRecord) {
+      record = {...this._selectedRecord};
+
+      console.log('Controls: ', this.form.controls['name'].value)
+
+      record.name = this.form.controls['name'].value;
+      record.username = this.form.controls['username'].value;
+      record.description = this.form.controls['description'].value;
+      record.password = this.form.controls['password'].value;
+      record.url = this.form.controls['url'].value;
+
+      this.store.dispatch(updateRecord({record}));
+
+      this.store.dispatch(selectedRecord({ record: null}));
+      this.showForm = false;
+      this.store.dispatch(showForm({show: false}));
+
+      if (!this._selectedRecord.id) {
+        
+      }
+
+    }
   }
 
   showPass ( event: Event, password: HTMLInputElement){
@@ -104,9 +131,40 @@ export class FormComponent implements OnInit, OnChanges {
   }
 
   hideForm(){
+
+    const currentRecord = this._selectedRecord;
+
+    if (!currentRecord?.id) {
+
+      Swal.fire({
+        title: "Do you want to leave without save changes?",
+        showDenyButton: true,
+        confirmButtonText: "Yes",
+        denyButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isDenied) {
+          return;
+        }
+        console.log(currentRecord);
+        // this.store.dispatch(selectedRecord({ record }));
+        // this.store.dispatch(showForm({ show: true }));
+        // this._clickedElement = recordElement;
+        // let recordNew =this._newRecord;
+        if ( currentRecord?.name) {
+          this.store.dispatch(deleteNewRecord({ name: currentRecord?.name}));
+        }
+        // this._newRecord = null;
+        this.store.dispatch(selectedRecord({ record: null}));
+        this.showForm = false;
+        this.store.dispatch(showForm({show: false}));
+      });
+      return;
+    }
+
     this.store.dispatch(selectedRecord({ record: null}));
     this.showForm = false;
     this.store.dispatch(showForm({show: false}));
+
   }
 
 }

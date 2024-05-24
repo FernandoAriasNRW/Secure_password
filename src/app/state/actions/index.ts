@@ -66,5 +66,17 @@ export const showForm = createAction(
   props<{ show: boolean }>()
 );
 
+export const addNewRecord = createAction(
+  '[Add New Record] Add New Record',
+  props<{ name: string }>()
+);
 
+export const deleteNewRecord = createAction(
+  '[Delete New Record] Delete New Record',
+  props<{ name: string }>()
+);
 
+export const updateRecord = createAction(
+  '[Update Record] Update Record',
+  props<{ record: Record }>()
+);

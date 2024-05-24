@@ -1,12 +1,8 @@
-import { isDevMode } from '@angular/core';
 import {
-  ActionReducer,
-  createFeatureSelector,
   createReducer,
-  createSelector,
   on
 } from '@ngrx/store';
-import { getRecords, getUser, login, loginAction, loginError, records, selectedRecord, showForm, user, vaults } from '../actions';
+import { addNewRecord, deleteNewRecord, getRecords, getUser, login, loginAction, loginError, records, selectedRecord, showForm, user, vaults } from '../actions';
 import { AppError, LoginState, User, UserState } from '../../shared/interfaces/auth';
 import { RecordState } from '../../shared/interfaces/records';
 import { VaultState } from '../../shared/interfaces/vaults';
@@ -37,6 +33,7 @@ export const initialState: AppState = {
       message: "",
       status: 0
     },
+    newRecord:  null,
   },
   login: {
     isLoggedIn: false,
@@ -97,6 +94,24 @@ export const recordReducer = createReducer(
   }),
   on(selectedRecord, (state: RecordState, { record })  => {
     return { ...state, loading: false, selectedRecord: record };
+  }),
+  on(addNewRecord, (state: RecordState, {name}) => {
+
+    const record = {
+      id: "",
+      name,
+      description: "",
+      username: "",
+      password: "",
+      url: "",
+      vaultId: "",
+      userId: ""
+    }
+    return { ...state, loading: false, selectedRecord: record, newRecord: record, records: [ ...state.records, record ] };
+  }),
+  on(deleteNewRecord, (state: RecordState, { name }) => {
+    console.log('Reducer Update Record: ', [ ...state.records.filter(record => record.name !== name) ])
+    return {...state, loading: false, newRecord: null, selectedRecord: null, records: [ ...state.records.filter(record => record.name !== name) ]};
   })
 );
 

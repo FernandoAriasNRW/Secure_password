@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../shared/interfaces/state';
+import { addNewRecord } from '../../state/actions';
 
 @Component({
   selector: 'app-modal',
@@ -17,6 +20,7 @@ export class ModalComponent implements OnInit {
 
   constructor(
     private readonly formBuilder: FormBuilder,
+    private readonly store: Store<AppState>,
   ){}
 
   ngOnInit(): void {
@@ -54,6 +58,16 @@ export class ModalComponent implements OnInit {
       modal.style.display="none";
       body.style.pointerEvents = "auto";
     }
+  }
+
+  onSubmit(){
+
+    const name = this.form.controls['name'].value;
+
+    this.store.dispatch(addNewRecord({ name }));
+
+    this.closeModal();
+    this.form.reset();
   }
 
 
