@@ -1,1 +1,101 @@
-<p>register works!</p>
+<section class="gradient-custom d-flex justify-content-between">
+  <div class="banner bg-light">
+    <div class="header d-flex flex-row justify-content-center mt-3">
+      <img src="../../../assets/icons/icon-96x96.png" alt="" srcset="">
+      <h1 class="text-center align-self-center">Secures Pass</h1>
+    </div>
+  </div>
+  <div class="container py-5 h-100">
+    <div class="row h-100">
+      <div class="col">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+          <div class="card-body">
+            <h2 class="mb-4 pb-md-0 mb-md-5 text-center">Sign Up</h2>
+            <form [formGroup]="form" class="p-3">
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div data-mdb-input-init class="form-outline">
+                    <!-- <label class="form-label" for="firstName">First Name</label> -->
+                    <input type="text" id="firstName" class="form-control form-control-lg" formControlName="name" placeholder="Enter your name"/>
+                    <span *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+                      <span *ngIf="form.get('name')?.errors?.['required']" class="error text-danger">First Name is required</span>
+                     </span>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div data-mdb-input-init class="form-outline">
+                    <!-- <label class="form-label" for="lastName">Last Name</label> -->
+                    <input type="text" id="lastName" class="form-control form-control-lg" formControlName="lastName" placeholder="Enter your last name"/>
+                    <span *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched">
+                      <span *ngIf="form.get('lastName')?.errors?.['required']" class="error text-danger">Last Name is required</span>
+                     </span>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col mb-4 pb-2">
+
+                  <div data-mdb-input-init class="form-outline">
+                    <!-- <label class="form-label" for="emailAddress">Email</label> -->
+                    <input type="email" id="emailAddress" class="form-control form-control-lg" placeholder="Enter your email" formControlName="email" />
+                    <span *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+                      <span *ngIf="form.get('email')?.errors?.['required']" class="error text-danger">Email is required</span>
+                      <span *ngIf="form.get('email')?.errors?.['email'] && !form.get('email')?.errors?.['required']" class="error text-danger">Please enter a valid email</span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div data-mdb-input-init class="form-outline">
+                    <!-- <label class="form-label" for="firstName">Password</label> -->
+                    <input type="password" id="password" class="form-control form-control-lg" formControlName="password" placeholder="Enter your password"/>
+                    <span *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+                      <span *ngIf="form.get('password')?.errors?.['required']" class="error text-danger">Password is required</span>
+                      <span *ngIf="form.get('password')?.errors?.['pattern'] && !form.get('password')?.errors?.['required']" class="error text-danger">Password must contain 8 chars, at least 1 uppercase, 1 lowercase, 1 number, and 1 special char</span>
+                    </span>
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div data-mdb-input-init class="form-outline">
+                    <!-- <label class="form-label" for="lastName">Confirm Password</label> -->
+                    <input type="password" id="confirmPassword" class="form-control form-control-lg" formControlName="confirmPassword" placeholder="Repeat your password"/>
+                    <span *ngIf="form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched">
+                      <span *ngIf="form.get('confirmPassword')?.errors?.['required']" class="error text-danger">Confirm Password is required</span>
+                      <span *ngIf="form.get('confirmPassword')?.errors?.['confirmPass'] && !form.get('confirmPassword')?.errors?.['required']" class="error text-danger">Passwords must match</span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div data-mdb-input-init class="form-outline col-10">
+                  <label class="form-label" for="avatar">Avatar</label>
+                  <input type="file" id="avatar" class="form-control form-control-lg" placeholder="Avatar" accept=".jpg, .png" (change)="upload($event)" formControlName="avatar"/>
+                </div>
+              </div>
+
+              <div class="mt-4 pt-2 d-flex justify-content-center">
+                <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Register" (click)="register()" [disabled]="!form.valid"/>
+              </div>
+
+              <p class="mt-3"><a [routerLink]="'/login'" class="link-primary link-underline-opacity-0">Login <i class="fa fa-arrow-circle-right ms-1"></i></a></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

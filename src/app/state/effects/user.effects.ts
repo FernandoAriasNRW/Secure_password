@@ -14,9 +14,9 @@ export class UserEffects {
     exhaustMap(action => this._userService.getUser(action.user).pipe(
       map( (result: User | null) => {
         if (result){
-          return { type: '[Home Page] User',  user: result }
+          return ({ type: '[Home Page] User',  user: result })
         }
-        return { type: '[Home Page] Get User failed',  error: true}
+        return ({ type: '[Home Page] Get User failed',  error: true})
       }
       ),
       catchError(error => of({ type: '[Login Page] Login Success', error }))

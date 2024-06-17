@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { AppError, User } from '../../shared/interfaces/auth';
 import { Record } from '../../shared/interfaces/records';
+import { Vault } from '../../shared/interfaces/vaults';
 
 export const login = createAction(
   '[Login Page] Login',
@@ -43,7 +44,7 @@ export const getRecordsFailed = createAction(
 
 export const vaults = createAction(
   '[Home Page] Vaults',
-  props<{ vaults: Record[] }>()
+  props<{ vaults: Vault[] }>()
 );
 
 export const loading = createAction(
@@ -68,7 +69,7 @@ export const showForm = createAction(
 
 export const addNewRecord = createAction(
   '[Add New Record] Add New Record',
-  props<{ name: string }>()
+  props<{ record: Record }>()
 );
 
 export const deleteNewRecord = createAction(
@@ -79,4 +80,54 @@ export const deleteNewRecord = createAction(
 export const updateRecord = createAction(
   '[Update Record] Update Record',
   props<{ record: Record }>()
+);
+
+export const createRecord = createAction(
+  '[Create Record] Create Record',
+  props<{ record: Record }>()
+);
+
+export const uploadAvatar = createAction(
+  '[Upload Avatar] Upload Avatar',
+  props<{ avatar: File }>()
+)
+
+export const uploadAvatarSuccess = createAction(
+  '[Upload Avatar] Upload Avatar Success',
+  props<{ avatar: string, avatarId: string }>()
+)
+
+export const uploadAvatarFailed = createAction(
+  '[Upload Avatar] Upload Avatar Failed',
+  props<{ error: Error }>()
+)
+
+export const recordLoading = createAction(
+  '[Record Loading] Record Loading',
+  props<{ loading: boolean }>()
+);
+
+export const userLoading = createAction(
+  '[User Loading] User Loading',
+  props<{ loading: boolean }>()
+);
+
+export const vaultLoading = createAction(
+  '[Vault Loading] Vault Loading',
+  props<{ loading: boolean }>()
+);
+
+export const folderLoading = createAction(
+  '[Folder Loading] Folder Loading',
+  props<{ loading: boolean }>()
+);
+
+export const loginLoading = createAction(
+  '[Login Loading] Login Loading',
+  props<{ loading: boolean }>()
+);
+
+export const formLoading = createAction(
+  '[Form Loading] Form Loading',
+  props<{ loading: boolean }>()
 );

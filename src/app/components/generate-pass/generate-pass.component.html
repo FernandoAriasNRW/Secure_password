@@ -1,0 +1,80 @@
+<button type="button" class="btn btn-light mt-2 w-50" (click)="showModal()">Generate password</button>
+
+<div id="generateModal" [style]="isShow + pointerEvents">
+  <div class="row" [formGroup]="form" >
+    <div class="col">
+      <div class="row mb-3">
+        <div class="col text-center">
+          <h2 class="h2">Password Generator</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col-8 password-cont">
+              <input type="password" class="p-2" name="pass" formControlName="pass" [value]="selectedRecord ? selectedRecord.password : ''" #password/>
+            </div>
+            <div class="col-4 d-flex flex-row justify-content-around">
+              <i class="fa fa-eye-slash align-self-center" id="togglePassword" #toggle (click)="showPass($event, password)"></i>
+              <button type="button" class="btn btn-primary " (click)="generatePassword()">Generate</button>
+              <button type="button" class="btn btn-light" (click)="savePass()">Save</button>
+              <button type="button" class="btn btn-light" (click)="closeModal()">Cancel</button>
+            </div>
+          </div>
+
+          <div class="row options-content">
+            <div class="col mt-4">
+              <div class="row">
+                <div class="col text-center">
+                  <h4 class="">Options to generate Password</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-sm-6">
+                  <label for="long" class="form-label">Long</label>
+                  <input type="number" min="0" class="form-control" name="long" placeholder="25" formControlName="long" (change)="changeOptions($event)">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 col-sm-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox"
+                      formControlName="uppercase" name="uppercase" (change)="changeOptions($event)">
+                    <label class="form-check-label" for="uppercase"> Uppercase </label>
+                  </div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox"
+                      name="lowercase" formControlName="lowercase" (change)="changeOptions($event)">
+                    <label class="form-check-label" for="lowercase"> Lowercase </label>
+                  </div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox"
+                      name="symbol" formControlName="symbol" (change)="changeOptions($event)">
+                    <label class="form-check-label" for="symbol"> Symbols </label>
+                  </div>
+                </div>
+
+                <div class="col-12 col-sm-6">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox"
+                      name="numbers" formControlName="numbers" (change)="changeOptions($event)">
+                    <label class="form-check-label" for="numbers"> Numbers </label>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

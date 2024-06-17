@@ -28,7 +28,7 @@ import { ListsComponent } from '../lists/lists.component';
 })
 export class HomeComponent implements OnInit {
 
-  private _loading: Observable<Boolean> = new Observable();
+  private _loading: Boolean = false;
 
   constructor(
     private readonly store: Store<AppState>,
@@ -68,10 +68,12 @@ export class HomeComponent implements OnInit {
           }
     });
 
-   this._loading = this.store.select(selectLoading);
+   this.store.select(selectLogin).subscribe((login)=> {
+    this._loading = login.loading;
+   });
   }
 
-  get loading(): Observable<Boolean> {
+  get loading(): Boolean {
     return this._loading;
   }
 

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../shared/interfaces/state';
-import { addNewRecord } from '../../state/actions';
+import { addNewRecord, showForm } from '../../state/actions';
 
 @Component({
   selector: 'app-modal',
@@ -31,12 +31,22 @@ export class ModalComponent implements OnInit {
 
 
   showModal(){
+
+    const record = document.getElementById('selected');
+
+
+    if (record) {
+      console.log(record.children);
+      return;
+    }
+
     let modal = document.getElementById('modal');
 
     if (modal) {
       modal.style.display="block";
       this.disableBackgroundInteractions();
     }
+
   }
 
   disableBackgroundInteractions() {
@@ -64,7 +74,21 @@ export class ModalComponent implements OnInit {
 
     const name = this.form.controls['name'].value;
 
-    this.store.dispatch(addNewRecord({ name }));
+    const record = {
+      id: "selected",
+      name,
+      description: "",
+      username: "",
+      password: "",
+      url: "",
+      vaultId: "",
+      userId: ""
+    }
+
+    this.store.dispatch(addNewRecord({ record }));
+    this.store.dispatch(showForm({show: true}));
+
+    location.hash = name;
 
     this.closeModal();
     this.form.reset();

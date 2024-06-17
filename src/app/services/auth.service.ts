@@ -28,6 +28,11 @@ export class AuthService {
 
   }
 
+  getUser(){
+    console.log(localStorage.getItem('user_id'));
+    return localStorage.getItem('user_id');
+  }
+
   getToken(){
     return localStorage.getItem('auth_token');
   }

@@ -8,14 +8,21 @@
       placeholder="Email"
 
     />
+    <!-- <span *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+      <span *ngIf="form.get('email')?.errors" class="error text-danger">Email is invalid</span>
+    </span> -->
     <input
       type="password"
       formControlName="password"
       placeholder="Password"
+      [class]=""
     />
+    <!-- <span *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+      <span *ngIf="form.get('password')?.errors" class="error text-danger">Password is required</span>
+    </span> -->
     <button type="submit" (click)="login()" (keypress)="login()">Log in</button>
-    <p>
-      <a [routerLink]="'/register'">Register</a>
+    <p class="mt-3">
+      <a [routerLink]="'/register'" class="link-light link-underline-opacity-0 register">Register <i class="fa fa-arrow-circle-right ms-1"></i></a>
     </p>
   </form>
 </div>

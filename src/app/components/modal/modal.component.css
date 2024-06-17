@@ -1,11 +1,11 @@
-.modal-open {
+/* .modal-open {
   overflow: hidden;
   pointer-events: none;
 }
 
 .modal-open #modal {
-  pointer-events: auto; /* Habilita los eventos de puntero en el modal */
-}
+  pointer-events: auto; 
+} */
 
 #modal {
   position: fixed;

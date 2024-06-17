@@ -1,4 +1,4 @@
-<form *ngIf="showForm" [formGroup]="form" (ngSubmit)="sendForm()" class="p-4 rounded-3 d-flex flex-column" #formElement>
+<form *ngIf="showForm" [formGroup]="form" class="p-4 rounded-3 d-flex flex-column" #formElement>
   <div class="mb-3">
     <h1 class="text-black mb-3">{{ title }}</h1>
     <label for="name" class="form-label text-black">Name:</label>
@@ -20,13 +20,17 @@
     <label for="password" class="form-label text-black">Password:</label>
     <div class="relative">
       <input type="password" formControlName="password" class="form-control"  #password>
-      <i class="fa fa-eye-slash" id="togglePassword" #toggle (click)="showPass($event, password)"></i>
+      <div class="icons">
+        <i class="fa fa-eye-slash" id="togglePassword" #toggle (click)="showPass($event, password)"></i>
+        <button class="bg-transparent" type="button" (click)="copyToClipboard(password)" ><i class="fa fa-paste"></i></button>
+      </div>
     </div>
     <!-- Mostramos el mensaje de error si el campo "telefono" es inválido y ha sido tocado -->
     <span *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
       <span *ngIf="form.get('password')?.errors" class="error text-danger">Password is required</span>
     </span>
   </div>
+    <app-generate-pass></app-generate-pass>
   <div>
     <label for="url" class="form-label text-black">URL:</label>
     <input type="text" formControlName="url" class="form-control">
@@ -41,6 +45,6 @@
   </div>
   <div class="buttons mt-2 align-self-center">
     <button type="button" class="btn btn-secondary m-2" (click)="hideForm()">Cancel</button>
-    <button type="submit" [disabled]="form.invalid" class="btn btn-primary" (click)="sendForm">Save</button>
+    <button type="submit" [disabled]="form.invalid" class="btn btn-primary" (click)="sendForm()">Save</button>
   </div>
 </form>

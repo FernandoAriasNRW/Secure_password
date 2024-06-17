@@ -2,7 +2,7 @@ import {
   createReducer,
   on
 } from '@ngrx/store';
-import { addNewRecord, deleteNewRecord, getRecords, getUser, login, loginAction, loginError, records, selectedRecord, showForm, user, vaults } from '../actions';
+import { addNewRecord, deleteNewRecord, getRecords, getUser, login, loginAction, loginError, recordLoading, records, selectedRecord, showForm, uploadAvatarSuccess, user, vaults } from '../actions';
 import { AppError, LoginState, User, UserState } from '../../shared/interfaces/auth';
 import { RecordState } from '../../shared/interfaces/records';
 import { VaultState } from '../../shared/interfaces/vaults';
@@ -17,8 +17,11 @@ export const initialState: AppState = {
       lastname: "",
       email: "",
       password: "",
-      role: ""
+      role: "",
+      avatar: "",
+      avatarId: ""
     },
+    avatar: "",
     loading: false,
     error: {
       message: "",
@@ -81,6 +84,18 @@ export const userReducer = createReducer(
   }),
   on(getUser, (state: UserState) => {
     return { ...state, loading: false };
+  }),
+  on(uploadAvatarSuccess, (state: UserState, { avatar, avatarId }) => {
+    return {
+     ...state,
+      user: {
+       ...state.user,
+        avatar: avatar,
+        avatarId: avatarId,
+      },
+      avatar: avatar,
+      loading: false
+    };
   })
 );
 
@@ -95,24 +110,18 @@ export const recordReducer = createReducer(
   on(selectedRecord, (state: RecordState, { record })  => {
     return { ...state, loading: false, selectedRecord: record };
   }),
-  on(addNewRecord, (state: RecordState, {name}) => {
+  on(addNewRecord, (state: RecordState, {record}) => {
 
-    const record = {
-      id: "",
-      name,
-      description: "",
-      username: "",
-      password: "",
-      url: "",
-      vaultId: "",
-      userId: ""
-    }
+
+    console.log('Reducer Record: ', record);
     return { ...state, loading: false, selectedRecord: record, newRecord: record, records: [ ...state.records, record ] };
   }),
   on(deleteNewRecord, (state: RecordState, { name }) => {
-    console.log('Reducer Update Record: ', [ ...state.records.filter(record => record.name !== name) ])
     return {...state, loading: false, newRecord: null, selectedRecord: null, records: [ ...state.records.filter(record => record.name !== name) ]};
-  })
+  }),
+  on(recordLoading, (state: RecordState, { loading })  => {
+    return { ...state, loading };
+  }),
 );
 
 export const vaultReducer = createReducer(

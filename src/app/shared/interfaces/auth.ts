@@ -12,6 +12,7 @@ export interface LoginState {
 export interface UserState {
   user: User;
   loading: boolean;
+  avatar: string;
   error: AppError;
 }
 
@@ -22,6 +23,8 @@ export interface User {
   email: string;
   password: string;
   role: string;
+  avatar: string;
+  avatarId: string;
 }
 
 export interface LoginResponse {

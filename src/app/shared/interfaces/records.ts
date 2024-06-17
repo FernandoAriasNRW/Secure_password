@@ -1,13 +1,13 @@
 import { AppError } from "./auth";
 
 export interface Record {
-  id: string;
+  id?: string;
   name: string;
   description: string;
   username: string;
   password: string;
   url: string;
-  vaultId: string;
+  vaultId?: string;
   userId: string;
 }
 

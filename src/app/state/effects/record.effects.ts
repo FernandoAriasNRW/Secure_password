@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, exhaustMap, map, of } from "rxjs";
 import { RecordService } from "../../services/record.service";
 import { Record } from "../../shared/interfaces/records";
-import { getRecords, updateRecord } from "../actions";
+import { createRecord, getRecords, updateRecord } from "../actions";
 
 @Injectable()
 export class RecordEffects {
@@ -13,9 +13,9 @@ export class RecordEffects {
     exhaustMap(() => this._recordService.getRecords().pipe(
       map( (result: Record[]) => {
         if (result){
-          return { type: '[Home Page] Records',  records: result.filter(r => r.vaultId === null) };
+          return ({ type: '[Home Page] Records',  records: result.filter(r => r.vaultId === null) });
         }
-        return { type: '[Home Page] Get Records failed',  error: true}
+        return ({ type: '[Home Page] Get Records failed',  error: true})
       }
       ),
       catchError(error => of({ type: '[Home Page] Records Failed', error }))
@@ -26,12 +26,24 @@ export class RecordEffects {
       exhaustMap(action => this._recordService.updateRecord(action.record).pipe(
         map( (result: Record) => {
           if (result){
-            console.log('Effect Result: ', result);
-            return { type: '[Home Page] Get Records' }
+            return ({ type: '[Home Page] Get Records' })
           }
-          return { type: '[Home Page] Get Records',  error: true}
+          return ({ type: '[Home Page] Get Records',  error: true})
         }
         ),
+        catchError(error => of({ type: '[Home Page] Update Record Failed', error }))
+      ))
+    ));
+
+    newRecord$ = createEffect(() => this._actions.pipe(
+      ofType(createRecord),
+      exhaustMap(action => this._recordService.createRecord(action.record).pipe(
+        map( (result: Record) => {
+          if (result){
+            return ({ type: '[Home Page] Get Records' })
+          }
+          return ({ type: '[Home Page] Get Records',  error: true})
+        }),
         catchError(error => of({ type: '[Home Page] Update Record Failed', error }))
       ))
     ))

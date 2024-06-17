@@ -8,11 +8,17 @@ button:hover {
   position: relative;
 }
 
-.fa {
+.icons {
   position: absolute;
-  top: 35%;
-  right: 5%;
+  top: 20%;
+  right: 2%;
   cursor: pointer;
+}
+
+.icons button {
+  border: none;
+  background: none;
+  margin-left: 1rem;
 }
 
 form {

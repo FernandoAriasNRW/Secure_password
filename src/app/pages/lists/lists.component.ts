@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../shared/interfaces/state';
 import { Router } from '@angular/router';
@@ -19,118 +19,90 @@ import Swal from 'sweetalert2';
   templateUrl: './lists.component.html',
   styleUrl: './lists.component.css'
 })
-export class ListsComponent implements OnInit, OnChanges, AfterContentChecked {
+export class ListsComponent implements OnInit, OnChanges, AfterViewChecked {
 
-  private _recordList: Record[] = [];
+  @ViewChild('formElement') form!: ElementRef;
+
+  recordList: Record[] = [];
   private _selectedRecord!: Record | null;
   private _show: boolean = false;
-  private _newRecord!: Record | null;
+  newRecord!: Record | null;
   private _clickedElement!: HTMLElement | null;
   private _firstCall: boolean = false;
 
   constructor(
     private readonly store: Store<AppState>,
     private readonly router: Router,
+    private readonly changeDetectorRef: ChangeDetectorRef,
   ) { }
-  ngAfterContentChecked(): void {
+  ngAfterViewChecked(): void {
 
-    this.store.select(selectRecords).subscribe(r => {
+    // if (this._firstCall) {
+    //   return;
+    // }
 
-      const list = document.getElementById('list-tab');
-      const content = document.getElementById('nav-tabContent');
+    // setTimeout(() => {
 
-      if (r.newRecord) {
+    //   if (location.hash) {
+    //     let record = this._recordList.find(r => r.id === location.hash.replace('#', ''));
+    //     const content = document.getElementById('nav-tabContent');
+    //     let recordElement = document.getElementById(location.hash.replace('#', ''));
 
-        this._newRecord = r.newRecord;
-        this._selectedRecord = r.newRecord;
+    //     if (!record) {
+    //       record = this._recordList.find(r => r.name === location.hash.replace('#', '').replaceAll("%20", " "));
 
-        if (list) {
-          for (let i = 0; i < list.children.length; i++) {
-            if (i === (list.children.length + 1)) {
-              list.children[i].children[0].classList.add('active');
-              break;
-            }
-            list.children[i].children[0].classList.remove('active');
-          }
-        }
+    //       const recordList = document.getElementById('list-tab');
 
-        if (content) {
-          this.showContent(content, r.newRecord);
-        }
-      }
+    //       if (recordList) {
+    //         recordElement = recordList.children[recordList.children.length - 1] as HTMLElement;
+    //       }
+    //     }
 
-      if (!this._newRecord && !this._firstCall) {
+    //     if (record && recordElement) {
 
-        this._firstCall = true;
-        const record = this._selectedRecord;
-        const recordElement = this._clickedElement;
+    //       recordElement.classList.add('active');
 
-        if (list && record && recordElement){
-          for (let i = 0; i < list.children.length; i++) {
-            if (list.children[i].attributes.getNamedItem('id')?.value === record.id) {
-              continue;
-            }
-            list.children[i].children[0].classList.remove('active');
-          }
+    //       this.store.dispatch(selectedRecord({ record }));
+    //       this.store.dispatch(showForm({ show: true }));
+    //       this._clickedElement = document.getElementById(location.hash.replace('#', ''));
 
-          this.store.select(selectForm).subscribe(form => {
-            this._show = form.show;
-          });
+    //       this.showContent(content, record);
+    //     }
+    //     this._firstCall = true;
+    //     return;
+    //   }
+    // }, 0);
 
-          if (recordElement.classList.contains('active')) {
-            if (this._show) {
-              recordElement.classList.remove("active");
-              this.hideContent(content, record);
-              return;
-            }
-
-            return;
-          }
-
-          this.store.dispatch(selectedRecord({ record }));
-          this.store.select(selectRecords).subscribe(record => {
-            this._selectedRecord = record.selectedRecord;
-          });
-
-          recordElement.classList.add("active");
-          this.showContent(content, record);
-          return;
-        }
-
-      }
-    })
   }
+
   ngOnChanges(changes: SimpleChanges): void {
     this.store.select(selectRecords).subscribe(records => {
-      console.log('List Changes: ', records);
-      this._recordList = records.records;
+      this.recordList = records.records;
+      this.newRecord = records.newRecord;
     });
   }
 
   ngOnInit(): void {
+
     this.store.select(selectRecords).subscribe(records => {
-      console.log('List Changes: ', records);
-      this._recordList = records.records;
+      this.recordList = records.records;
+      this.newRecord = records.newRecord;
     });
 
-    this.store.select(selectRecords).subscribe(recordState => {
-      this._newRecord = recordState.newRecord;
-    })
-  }
-
-  get recordList(): Record[] {
-    return this._recordList;
   }
 
   setActive(event: MouseEvent, list: HTMLElement, record: Record): void {
 
-
     const recordElement: HTMLElement = event.target as HTMLElement;
     const content = document.getElementById('nav-tabContent');
 
-    console.log(this._newRecord)
-    if (!this._selectedRecord?.id && this._newRecord) {
-      if (record.name === this._newRecord.name) {
+    this.store.select(selectRecords).subscribe(records => {
+      this.newRecord = records.newRecord;
+      this._selectedRecord = records.selectedRecord;
+    });
+
+    if (this._selectedRecord?.id === 'selected' && this.newRecord) {
+      if (record.name === this.newRecord.name) {
         return;
       }
 
@@ -147,17 +119,19 @@ export class ListsComponent implements OnInit, OnChanges, AfterContentChecked {
         this.store.dispatch(selectedRecord({ record }));
         this.store.dispatch(showForm({ show: true }));
         this._clickedElement = recordElement;
-        let recordNew =this._newRecord;
+        let recordNew = this.newRecord;
 
-        if ( recordNew?.name) {
-          this.store.dispatch(deleteNewRecord({ name: recordNew?.name}));
+        if (recordNew?.name) {
+          this.store.dispatch(deleteNewRecord({ name: recordNew?.name }));
         }
-        this._newRecord = null;
+        this.newRecord = null;
       });
 
       return;
 
     }
+
+
 
     for (let i = 0; i < list.children.length; i++) {
       if (list.children[i].attributes.getNamedItem('id')?.value === record.id) {
@@ -170,6 +144,8 @@ export class ListsComponent implements OnInit, OnChanges, AfterContentChecked {
       this._show = form.show;
     });
 
+    this.store.dispatch(showForm({ show: true }));
+    this.store.dispatch(selectedRecord({ record }));
 
     if (recordElement.classList.contains('active')) {
 
@@ -179,14 +155,13 @@ export class ListsComponent implements OnInit, OnChanges, AfterContentChecked {
         return;
       }
       this.store.dispatch(selectedRecord({ record }));
-      this.store.dispatch(showForm({ show: true }));
       return;
     }
 
-    this.store.dispatch(selectedRecord({ record }));
     this.store.select(selectRecords).subscribe(record => {
       this._selectedRecord = record.selectedRecord;
     });
+    this.store.dispatch(showForm({ show: true }));
     recordElement.classList.add("active");
     this.showContent(content, record);
     return;
@@ -199,12 +174,11 @@ export class ListsComponent implements OnInit, OnChanges, AfterContentChecked {
       return;
     }
 
-
     for (let i = 0; i < content.children.length + 1; i++) {
       content.children[i]?.classList.remove("show");
       content.children[i]?.classList.remove("active");
 
-      if (content.children[i]?.attributes.getNamedItem('id')?.value === (record.name + record.id)) {
+      if (content.children[i]?.attributes.getNamedItem('id')?.value === (record.id)) {
         content.children[i]?.classList.add("show");
         content.children[i]?.classList.add("active");
       };
