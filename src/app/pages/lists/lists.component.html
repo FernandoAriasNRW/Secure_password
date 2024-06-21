@@ -2,11 +2,11 @@
   <div class="col-6">
     <h2 class="text-dark ms-3">My Vault</h2>
     <div class="list-group" id="list-tab" role="tablist" #list>
-      <a *ngFor="let record of recordList" class="list-group-item list-group-item-action m-1 d-flex flex-row justify-content-between row bg-transparent text-dark border-custom" [id]="'#' + record.id" data-toggle="list" [href]="'#' + record.id" role="tab" aria-controls="home">
+      <a *ngFor="let record of recordList" class="list-group-item list-group-item-action m-1 d-flex flex-row justify-content-between row bg-transparent text-dark border-custom" [id]="'#' + record.id" data-toggle="list" [routerLink]="'#' + record.id" role="tab" aria-controls="home">
        <span class="col-10" [class]="record.id === 'selected' ? 'active' : ''" (click)="setActive($event, list, record)"> {{ record.name }}</span>
        <span class="col-2">
         <i class="fa fa-paperclip ms-2" (click)="addToVault(record)"></i>
-        <i class="fa fa-trash-alt ms-2" (click)="deleteRecord(record)"></i>
+        <i class="fa fa-trash ms-2" (click)="deleteRecord(record)"></i>
       </span>
       </a>
 

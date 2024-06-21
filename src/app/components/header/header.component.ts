@@ -20,6 +20,7 @@ import { CommonModule } from '@angular/common';
 export class HeaderComponent implements OnInit, AfterViewInit {
 
   user!: User;
+  classShowProfile: string = '';
 
   constructor(
     private readonly store: Store<AppState>,
@@ -30,7 +31,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     const userId = localStorage.getItem('user_id');
-    
+
     if (userId) {
       this.store.dispatch(getUser({ user: userId }));
      }
@@ -38,6 +39,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
      this.store.select(selectUser).subscribe( result => {
        this.user = result.user;
      })
+  }
+
+  showProfile(){
+    this.classShowProfile = this.classShowProfile === '' ? 'show' : '';
   }
 
 }

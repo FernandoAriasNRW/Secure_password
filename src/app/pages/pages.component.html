@@ -1,0 +1,10 @@
+<app-loading *ngIf="loading"></app-loading>
+
+<div *ngIf="!loading"  class="main-wrapper">
+  <div class="topbar">
+    <app-header></app-header>
+  </div>
+  <app-menu></app-menu>
+  <router-outlet></router-outlet>
+</div>
+

@@ -4,7 +4,7 @@
 }
 
 .modal-open #modal {
-  pointer-events: auto; 
+  pointer-events: auto;
 } */
 
 #modal {
@@ -39,4 +39,22 @@
     border-bottom: 1px solid black;
   }
 
+.link-modal {
+  text-decoration: none;
+}
 
+.divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: rgba(120, 130, 140, 0.13);
+}
+
+.modal-menu-btn {
+  border: 0;
+  background: none;
+}
+
+.modal-menu-btn:hover {
+  border-bottom: 2px solid var(--light);
+}

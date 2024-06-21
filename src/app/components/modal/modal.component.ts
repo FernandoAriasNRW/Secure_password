@@ -17,6 +17,7 @@ import { addNewRecord, showForm } from '../../state/actions';
 })
 export class ModalComponent implements OnInit {
   form!: FormGroup;
+  classShowMenu: string = '';
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -36,7 +37,6 @@ export class ModalComponent implements OnInit {
 
 
     if (record) {
-      console.log(record.children);
       return;
     }
 
@@ -46,6 +46,8 @@ export class ModalComponent implements OnInit {
       modal.style.display="block";
       this.disableBackgroundInteractions();
     }
+
+    this.showMenu();
 
   }
 
@@ -58,6 +60,10 @@ export class ModalComponent implements OnInit {
       modal.style.pointerEvents = "auto";
     }
 
+  }
+
+  showMenu() {
+    this.classShowMenu = this.classShowMenu === '' ? 'show' : '';
   }
 
   closeModal(){

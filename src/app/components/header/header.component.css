@@ -12,13 +12,15 @@ a {
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
+input {
+  width: 10rem;
+}
+
 img {
   border-radius: 45%;
-  max-width: 60%;
 }
 
 li {
-  max-width: 35%;
   cursor: pointer;
 }
 
@@ -27,9 +29,21 @@ a {
   text-decoration: none;
 }
 
-.header {
-  background-color: #022968;
-  min-width: 101.2%;
+/* .navbar {
+  min-width: 100%;
+  max-height: 5rem;
+} */
+
+.logo {
+  max-width: 4rem;
+  max-height: 5rem;
 }
 
 
+.profileMenu {
+  font-size: medium;
+}
+
+.btn-profile {
+ background-color:  #178ea3;
+}

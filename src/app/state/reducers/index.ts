@@ -14,7 +14,7 @@ export const initialState: AppState = {
     user: {
       id: "",
       name: "",
-      lastname: "",
+      lastName: "",
       email: "",
       password: "",
       role: "",

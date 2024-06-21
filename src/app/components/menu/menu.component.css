@@ -1,4 +1,4 @@
-@keyframes swing {
+/* @keyframes swing {
   0% {
     transform: rotate(0deg);
   }
@@ -59,8 +59,6 @@ body {
   transition: all 0.3s ease;
 }
 
-/*----------------toggeled sidebar----------------*/
-
 .page-wrapper.toggled .sidebar-wrapper {
   left: 0px;
 }
@@ -70,7 +68,7 @@ body {
     padding-left: 300px;
   }
 }
-/*----------------show sidebar button----------------*/
+
 #show-sidebar {
   display: inline;
   text-align: end;
@@ -78,8 +76,6 @@ body {
   width: 100%;
   transition-delay: 0.3s;
 }
-
-/*----------------sidebar-wrapper----------------*/
 
 .sidebar-wrapper {
   width: 260px;
@@ -101,8 +97,6 @@ body {
   text-decoration: none;
 }
 
-/*----------------sidebar-content----------------*/
-
 .sidebar-content {
   max-height: calc(100% - 30px);
   height: calc(100% - 30px);
@@ -113,8 +107,6 @@ body {
 .sidebar-content.desktop {
   overflow-y: hidden;
 }
-
-/*--------------------sidebar-brand----------------------*/
 
 .sidebar-wrapper .sidebar-brand {
   padding: 1rem 2rem;
@@ -134,8 +126,6 @@ body {
   font-size: 1rem;
 }
 
-/*-----------------------sidebar-search------------------------*/
-
 input.search-menu::placeholder {
   color:white;
   border-radius: 2rem;
@@ -145,8 +135,6 @@ input.search-menu::placeholder {
   padding: 2% 4%;
   color: white;
 }
-
-/*----------------------sidebar-menu-------------------------*/
 
 .sidebar-wrapper .sidebar-menu {
   padding-bottom: 1%;
@@ -241,8 +229,6 @@ input.search-menu::placeholder {
   right: 17px;
 }
 
-/*--------------------------side-footer------------------------------*/
-
 .sidebar-footer {
   position: absolute;
   width: 100%;
@@ -286,8 +272,6 @@ input.search-menu::placeholder {
   animation: sonar 1.5s infinite;
 }
 
-/*------scroll bar---------------------*/
-
 ::-webkit-scrollbar {
   width: 5px;
   height: 7px;
@@ -321,8 +305,6 @@ input.search-menu::placeholder {
 ::-webkit-scrollbar-corner {
   background: transparent;
 }
-
-/*-----------------------------chiller-theme-------------------------------------------------*/
 
 .chiller-theme .sidebar-wrapper {
   background: rgb(28, 60, 111);
@@ -448,4 +430,11 @@ a {
   -webkit-box-shadow: 5px 0px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 5px 0px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 5px 0px 5px 0px rgba(0, 0, 0, 0.75);
+} */
+
+.sidebar-image {
+  width: 15%;
+  margin-right: 1rem;
+  border-radius: 0.5rem;
+  color: #bdbdbd;
 }

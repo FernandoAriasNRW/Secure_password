@@ -211,14 +211,9 @@ export class FormComponent implements OnInit, OnChanges, AfterViewChecked {
         if (result.isDenied) {
           return;
         }
-        // this.store.dispatch(selectedRecord({ record }));
-        // this.store.dispatch(showForm({ show: true }));
-        // this._clickedElement = recordElement;
-        // let recordNew =this._newRecord;
         if (currentRecord?.name) {
           this.store.dispatch(deleteNewRecord({ name: currentRecord?.name }));
         }
-        // this._newRecord = null;
         this.store.dispatch(selectedRecord({ record: null }));
         this.showForm = false;
         this.store.dispatch(showForm({ show: false }));

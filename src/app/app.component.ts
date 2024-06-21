@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { AppState } from './shared/interfaces/state';
 import { Store } from '@ngrx/store';
 import { selectLogin } from './state/selectors';
+import { PagesComponent } from './pages/pages.component';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ import { selectLogin } from './state/selectors';
     RegisterComponent,
     HeaderComponent,
     MenuComponent,
+    PagesComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

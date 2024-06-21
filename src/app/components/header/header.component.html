@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary p-0 m-0">
+<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary p-0 m-0">
   <div class="container-fluid ps-4 pe-0 m-0 d-flex header">
     <div class="col-4">
       <app-search></app-search>
@@ -16,13 +16,73 @@
   style="width: 150px;" alt="Avatar" />
           </a>
         </li>
-        <!-- <li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link text-white" href="#">Features</a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-white" href="#">Pricing</a>
-        </li>  -->
+        </li>
       </ul>
     </div>
   </div>
-</nav>
+</nav> -->
+
+<header class="topbar">
+  <nav class="navbar top-navbar navbar-expand-md navbar-light">
+    <div class="navbar-header">
+      <a class="navbar-brand d-flex flex-row justify-content-between" href="">
+        <img src="../../../assets/icons/icon-128x128.png" alt="homepage" class="logo" />
+        <div class="title m-0">
+          <h2 class="h3 m-0">Secures</h2>
+          <h2 class="h3 m-0">Pass</h2>
+        </div>
+      </a>
+    </div>
+    <div class="navbar-collapse d-flex justify-content-end">
+      <!-- <ul class="navbar-nav mr-auto col-4">
+        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark"
+            href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+        <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark"
+            href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+        <li class="nav-item hidden-sm-down"></li>
+      </ul> -->
+      <ul class="navbar-nav my-lg-0 row">
+        <li class="col-9 nav-item hidden-xs-down search-box d-flex flex-row justify-content-end">
+          <form class="d-flex flex-row">
+            <input type="text" class="form-control h-75 align-self-center w-100" placeholder="Search & enter">
+            <!-- <a class="srh-btn ms-3"><i class="ti-close"></i></a> -->
+          </form>
+          <button type="button" class="nav-link hidden-sm-down waves-effect waves-dark"><i
+              class="ti-search"></i></button>
+        </li>
+        <li class="col-3 nav-item dropdown ">
+          <button type="button" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showProfile()"><img
+              src="../../../assets/images/no-image.png" alt="user" class="profile-pic" /></button>
+        </li>
+        <div class="dropdown-menu dropdown-menu-right mt-5" [ngClass]="classShowProfile">
+          <ul class="dropdown-user">
+            <li>
+              <div class="dw-user-box">
+                <div class="u-img"><img src="../../../assets/images/no-image.png" alt="user"></div>
+                <div class="u-text">
+                  <h4>{{ user.name + " " + user.lastName }}</h4>
+                  <p class="text-muted">{{ user.email }}</p>
+                  <button type="button" class="btn btn-rounded btn-primary btn-sm">View Profile</button>
+                </div>
+              </div>
+            </li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" class="profileMenu"><i class="ti-user me-2"></i> My Profile</a></li>
+            <li><a href="#" class="profileMenu"><i class="ti-wallet me-2"></i> My Balance</a></li>
+            <li><a href="#" class="profileMenu"><i class="ti-email me-2"></i> Inbox</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" class="profileMenu"><i class="ti-settings me-2"></i> Account Setting</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" class="profileMenu"><i class="fa fa-power-off me-2"></i> Logout</a></li>
+          </ul>
+        </div>
+
+      </ul>
+    </div>
+  </nav>
+</header>

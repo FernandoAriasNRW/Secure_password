@@ -1,7 +1,7 @@
 import { AfterContentChecked, AfterContentInit, AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../shared/interfaces/state';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Record } from '../../shared/interfaces/records';
 import { selectForm, selectRecords } from '../../state/selectors';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,8 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [
     CommonModule,
-    FormComponent
+    FormComponent,
+    RouterModule,
   ],
   templateUrl: './lists.component.html',
   styleUrl: './lists.component.css'

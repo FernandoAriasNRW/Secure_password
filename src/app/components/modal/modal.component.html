@@ -1,4 +1,12 @@
-<button type="button" class="btn btn-light m-2" (click)="showModal()">Add New Record</button>
+<button type="button" class="btn btn-primary m-2" (click)="showMenu()">Add New</button>
+
+<ul aria-expanded="false" class="dropdown-menu dropdown-menu-right ms-5" [ngClass]="classShowMenu">
+  <li><button tye="button" class="modal-menu-btn mt-3" (click)="showModal()">Record</button></li>
+  <li class="divider"></li>
+  <li><button href="" class="modal-menu-btn">Folder</button></li>
+  <li class="divider"></li>
+  <li><button href="" class="modal-menu-btn mb-3">Vault</button></li>
+</ul>
 
 <div id="modal">
   <form [formGroup]="form" class="d-flex flex-column justify-content-around h-100">

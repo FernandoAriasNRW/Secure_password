@@ -1,0 +1,13 @@
+.main-wrapper {
+  height: 200vh;
+  align-items:stretch;
+}
+
+.page-wrapper {
+  min-height: 90vh;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+}
